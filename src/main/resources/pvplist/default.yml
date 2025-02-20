@@ -1,0 +1,94 @@
+rule:
+  # 对战类型 - Single(单打) Double(双打) 严格大小写奥
+  battleType: "Single"
+  #等级上限
+  levelCap: 50
+  #宝可梦数量
+  numPokemon: 3
+  #回合时间
+  turnTime: 30
+  #队伍选择时间
+  teamSelectTime: 60
+  #战斗前为玩家宝可梦回满血 战斗后结束
+  fullHeal: true
+  #是否把宝可梦临时提升到设置的等级上限
+  raiseToCap: true
+  #是否允许双方预览队伍
+  teamPreview: true
+  # 分级 OU UU RU NU PU 这里大小写严格奥 空就代表无限制
+  tier: ""
+  # 使用哪个世代的机制 None(默认 - Mega / Dynamax 2选1)、 Mega(Mega进化)、Dynamax(极巨化)、None(Mega、Dynamax 都不可以) 要跟里面大小写相同奥 有None Mega Dynamax None
+  oldgen: "None"
+
+  blackList:
+    #黑名单宝可梦
+    blackListPokemon: [米粒龙,怪力,脱壳忍者]
+    #黑名单技能
+    blackListMove: [吹飞]
+    #黑名单携带物
+    blackListHeldItem: [传说石板]
+    #黑名单特性
+    blackListAbility: []
+    #黑名单形态
+    blackListForm: [达摩模式]
+
+# 是否开启条款
+openClauses: false
+# 条款
+Clauses:
+  # 包包条款：玩家不可以在战斗时使用背包中的道具。
+  bagClause: true
+  # 接力棒条款：禁止拥有接棒招式的宝可梦。
+  batonPassClause: false
+  # 接力仅一次条款：只有一只宝可梦可以拥有接棒招式。
+  maxOneBatonPass: false
+  # 喋喋不休规则：禁止拥有喋喋不休招式的宝可梦。
+  chatter: false
+  # 降雨规则：禁止拥有降雨特性的宝可梦。
+  drizzle: false
+  # 降雨-悠游自如规则：队伍中不可同时存在降雨特性和悠游自如特性。
+  drizzleSwim: false
+  # 日照规则：禁止拥有日照特性的宝可梦。
+  drought: false
+  # 无限战斗规则：禁止能让战斗无限进行的宝可梦，具体指携带苹野果，并学会回收利用，并学会投掷或治愈波动或痛苦平分的宝可梦。
+  endlessBattle: false
+  # 闪避特性规则：禁止拥有沙隐或雪隐特性的宝可梦。
+  evasionAbility: false
+  # 闪避招式规则：禁止拥有影子分身或变小招式的宝可梦
+  evasion: false
+  # 一站到底规则：禁止逃跑。
+  forfeitClause: false
+  # 反转对战规则：属性克制关系反转，原本效果绝佳的变为效果不理想，原本没有效果和效果不理想的变为效果绝佳。不改变特性对属性的影响。
+  inverseBattle: false
+  # 携带物品规则：队伍中不可携带重复物品。
+  noDuplicateItems: false
+  # 神兽规则：禁止使用神兽。
+  legendBan: false
+  # 超级进化规则：禁止携带超级进化石。
+  megaStone: false
+  # 心情不定规则：禁止拥有心情不定特性的宝可梦。
+  moody: false
+  # 一击必杀规则：禁止拥有一击必杀招式的宝可梦。一击必杀招式包括：地裂，断头钳，角钻，绝对零度。
+  ohKo: false
+  # 沙暴规则：禁止拥有沙暴特性的宝可梦。
+  sandStream: false
+  # 踩影规则：禁止拥有踩影特性的宝可梦。
+  shadowTag: false
+  # 王牌空战规则：使用《宝可梦X / Y》中空中对战的规则。
+  skyBattle: false
+  # 催眠规则：战斗中每个队伍只能有一只宝可梦陷入睡眠状态。自己使用睡觉也会触发此规则。
+  sleepClause: false
+  # 破壳规则：禁止同时拥有破壳和接棒招式的宝可梦。
+  smashPass: false
+  # 冰雹规则：禁止拥有降雪特性的宝可梦。
+  snowWarning: false
+  # 心之水滴规则：禁止携带心之水滴的拉帝亚斯或拉帝欧斯。
+  soulDew: false
+  # 种类规则：队伍中不可存在重复的宝可梦。
+  multipleSpecies: false
+  # 速度规则：如果宝可梦拥有接棒招式，则其不能同时拥有 提升速度的招式/特性 和 提升另一项能力的招式/特性。例如带接棒，高速移动，剑舞的巨钳螳螂。
+  speedPass: false
+  # 虚张声势规则：禁止拥有虚张声势招式的宝可梦。
+  swagger: false
+  # 天气加速规则：队伍中不可同时存在降雨特性和悠游自如特性 或 日照特性和叶绿素特性 或 沙暴特性和拨沙特性。
+  weatherSpeed: false

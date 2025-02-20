@@ -1,0 +1,6 @@
+name: RePokePVP
+version: '1.0.3'
+main: io.github.swagree.repokepvp.Main
+commands:
+  rpp:
+    description: ""

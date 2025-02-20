@@ -1,0 +1,34 @@
+# 存储类型（mysql/sqlite/yaml）
+Storage:
+  Type: "sqlite"
+  #如果开了mysql选项 就要自己修改好下面的配置(废话)
+  MySQL:
+    Host: "localhost"
+    Port: 3306
+    Database: "repokepvp"
+    Username: "root"
+    Password: "123456"
+    Table: "daily_wins"
+
+#你先给nye点数吧 我懒得自己写存储库了 正好nye也有排行榜
+WinCommand:
+  - "say %player%获胜了"
+LoseCommand:
+  - "say %player%失败了"
+DailyFirstWinCommand:
+  - "say &a玩家 &6%player% &a获得了今日首胜！"
+
+Ranks:
+  青铜:
+    RequiredScore: 100
+    Commands:
+      - "broadcast {player} 晋级青铜段位！"
+  白银:
+    RequiredScore: 500
+    Commands:
+      - "give {player} diamond 1"
+      - "title {player} title §6白银段位达成！"
+  黄金:
+    RequiredScore: 1000
+    Commands:
+      - "effect give {player} speed 300 1"
