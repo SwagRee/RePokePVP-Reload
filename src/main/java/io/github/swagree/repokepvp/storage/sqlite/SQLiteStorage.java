@@ -1,6 +1,7 @@
-package io.github.swagree.repokepvp.storage;
+package io.github.swagree.repokepvp.storage.sqlite;
 
 import io.github.swagree.repokepvp.entity.PlayerScore;
+import io.github.swagree.repokepvp.storage.Storage;
 import org.bukkit.Bukkit;
 import java.io.File;
 import java.sql.*;
@@ -23,21 +24,23 @@ public class SQLiteStorage implements Storage {
         }
     }
 
+    private static final int DEFAULT_SCORE = 100;
+
     private void initTable() throws SQLException {
+        String sql = String.format(
+                "CREATE TABLE IF NOT EXISTS daily_wins (" +
+                        "uuid TEXT PRIMARY KEY, " +
+                        "last_win_date TEXT, " +
+                        "score INTEGER DEFAULT %d, " +  // 使用格式化字符串
+                        "wins INTEGER DEFAULT 0, " +
+                        "total_match INTEGER DEFAULT 0, " +
+                        "player_name TEXT)",
+                DEFAULT_SCORE);
+
         try (Statement stmt = connection.createStatement()) {
-            // 确保包含所有字段
-            stmt.executeUpdate(
-                    "CREATE TABLE IF NOT EXISTS daily_wins (" +
-                            "uuid TEXT PRIMARY KEY, " +
-                            "last_win_date TEXT, " +
-                            "score INTEGER DEFAULT 0, " +
-                            "wins INTEGER DEFAULT 0, " +
-                            "total_match INTEGER DEFAULT 0, " +
-                            "player_name TEXT)"
-            );
+            stmt.executeUpdate(sql);
         }
     }
-
     @Override
     public void updateWinRecord(UUID uuid, LocalDate today, Integer total_match, Integer wins) throws SQLException {
         String playerName = Bukkit.getOfflinePlayer(uuid).getName();
@@ -70,6 +73,27 @@ public class SQLiteStorage implements Storage {
             ps.executeUpdate();
         }
     }
+    // 确保其他方法字段匹配
+    @Override
+    public void reduceScore(UUID uuid, int points) throws SQLException {
+        try {
+            if(getScore(uuid)==0){
+                return;
+            }
+            if(getScore(uuid)==DEFAULT_SCORE){
+                return;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        String sql = "UPDATE daily_wins SET score = score - ? WHERE uuid = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, points);
+            ps.setString(2, uuid.toString());
+            ps.executeUpdate();
+        }
+    }
+
 @Override
     public void addTotalMatch(UUID uuid) throws SQLException {
         String sql = "UPDATE daily_wins SET total_match = total_match + 1 WHERE uuid = ?";

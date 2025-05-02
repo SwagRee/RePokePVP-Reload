@@ -21,6 +21,7 @@ public interface Storage {
 
     void addTotalMatch(UUID uuid) throws SQLException;
     void addWins(UUID uuid) throws SQLException;
+    void reduceScore(UUID uuid, int points) throws SQLException;
 
 
 }

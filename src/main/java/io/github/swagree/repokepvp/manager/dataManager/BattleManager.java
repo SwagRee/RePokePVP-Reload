@@ -1,13 +1,13 @@
 package io.github.swagree.repokepvp.manager.dataManager;
 
-import io.github.swagree.repokepvp.Main;
+import io.github.swagree.Main;
 import io.github.swagree.repokepvp.entity.PlayerScore;
 import io.github.swagree.repokepvp.manager.rewardManager.RewardExecutor;
 import io.github.swagree.repokepvp.manager.configManager.StorageConfig;
-import io.github.swagree.repokepvp.storage.MySQLStorage;
-import io.github.swagree.repokepvp.storage.SQLiteStorage;
+import io.github.swagree.repokepvp.storage.mysql.MySQLStorage;
+import io.github.swagree.repokepvp.storage.sqlite.SQLiteStorage;
 import io.github.swagree.repokepvp.storage.Storage;
-import io.github.swagree.repokepvp.storage.YamlStorage;
+import io.github.swagree.repokepvp.storage.yaml.YamlStorage;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
@@ -65,6 +65,19 @@ public class BattleManager {
         }
     }
 
+    public void handleDefeat(Player player) {
+        reduceScore(player.getUniqueId(),10);
+    }
+
+    public void reduceScore(UUID uuid,Integer i) {
+        try {
+            storage.reduceScore(uuid,i);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public List<PlayerScore> getTop() throws SQLException {
         return storage.getTopPlayers(10);
     }
@@ -72,6 +85,11 @@ public class BattleManager {
     public Integer getWins(UUID uuid) throws SQLException {
         return storage.getWins(uuid);
     }
+
+    public Integer getScore(UUID uuid) throws SQLException {
+        return storage.getScore(uuid);
+    }
+
 
     public Integer getTotalMatch(UUID uuid) throws SQLException {
         return storage.getTotalMatch(uuid);

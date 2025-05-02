@@ -20,7 +20,6 @@ public class StorageConfig {
         return "sqlite";
     }
 
-    // Getters
     public String getStorageType() { return storageType; }
     public MySQLConfig getMySQLConfig() { return mysqlConfig; }
 

@@ -1,6 +1,7 @@
-package io.github.swagree.repokepvp.storage;
+package io.github.swagree.repokepvp.storage.yaml;
 
 import io.github.swagree.repokepvp.entity.PlayerScore;
+import io.github.swagree.repokepvp.storage.Storage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -105,6 +106,11 @@ public class YamlStorage implements Storage {
 
     @Override
     public void addWins(UUID uuid) throws SQLException {
+
+    }
+
+    @Override
+    public void reduceScore(UUID uuid, int points) {
 
     }
 

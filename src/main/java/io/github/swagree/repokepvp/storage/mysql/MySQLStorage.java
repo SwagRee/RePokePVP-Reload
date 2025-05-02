@@ -1,6 +1,7 @@
-package io.github.swagree.repokepvp.storage;
+package io.github.swagree.repokepvp.storage.mysql;
 
 import io.github.swagree.repokepvp.entity.PlayerScore;
+import io.github.swagree.repokepvp.storage.Storage;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
@@ -160,6 +161,11 @@ public class MySQLStorage implements Storage {
 
     @Override
     public void addWins(UUID uuid) throws SQLException {
+
+    }
+
+    @Override
+    public void reduceScore(UUID uuid, int points) {
 
     }
 }
