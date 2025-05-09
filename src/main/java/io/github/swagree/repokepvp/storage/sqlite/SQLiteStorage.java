@@ -17,6 +17,13 @@ public class SQLiteStorage implements Storage {
         try {
             Class.forName("org.sqlite.JDBC");
             File dbFile = new File(dataFolder, "daily_wins.db");
+
+            // 新增目录创建逻辑
+            File parentDir = dbFile.getParentFile();
+            if (!parentDir.exists()) {
+                parentDir.mkdirs(); // 自动创建所有不存在的父目录
+            }
+
             this.connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
             initTable();
         } catch (Exception e) {
@@ -48,16 +55,16 @@ public class SQLiteStorage implements Storage {
         String sql = "INSERT OR REPLACE INTO daily_wins " +
                 "(uuid, last_win_date, score, player_name, total_match, wins) " +
                 "VALUES (?, ?, " +
-                "COALESCE((SELECT score FROM daily_wins WHERE uuid = ?), 0), " +
+                "COALESCE((SELECT score FROM daily_wins WHERE uuid = ?), 100), " + // 修改此处，将0改为100
                 "?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setString(1, uuid.toString());       // uuid
-            ps.setString(2, today.toString());      // last_win_date
-            ps.setString(3, uuid.toString());      // 用于子查询的uuid
-            ps.setString(4, playerName);            // player_name
-            ps.setInt(5, total_match);              // total_match
-            ps.setInt(6, wins);                    // wins
+            ps.setString(1, uuid.toString());
+            ps.setString(2, today.toString());
+            ps.setString(3, uuid.toString());
+            ps.setString(4, playerName);
+            ps.setInt(5, total_match);
+            ps.setInt(6, wins);
 
             ps.executeUpdate();
         }
@@ -77,15 +84,24 @@ public class SQLiteStorage implements Storage {
     @Override
     public void reduceScore(UUID uuid, int points) throws SQLException {
         try {
-            if(getScore(uuid)==0){
+            int currentScore = getScore(uuid);
+            if (currentScore == 0) {
                 return;
             }
-            if(getScore(uuid)==DEFAULT_SCORE){
-                return;
-            }
-        }catch (Exception e){
+            // 移除检查DEFAULT_SCORE的条件
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // 确保记录存在，若不存在则插入默认记录
+        String insertSql = "INSERT OR IGNORE INTO daily_wins (uuid, score, player_name) VALUES (?, ?, ?)";
+        try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
+            ps.setString(1, uuid.toString());
+            ps.setInt(2, DEFAULT_SCORE);
+            ps.setString(3, Bukkit.getOfflinePlayer(uuid).getName());
+            ps.executeUpdate();
+        }
+
         String sql = "UPDATE daily_wins SET score = score - ? WHERE uuid = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, points);

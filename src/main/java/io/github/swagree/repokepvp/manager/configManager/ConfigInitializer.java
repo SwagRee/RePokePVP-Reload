@@ -1,6 +1,6 @@
 package io.github.swagree.repokepvp.manager.configManager;
 
-import io.github.swagree.Main;
+import io.github.swagree.repokepvp.Main;
 
 import java.io.File;
 

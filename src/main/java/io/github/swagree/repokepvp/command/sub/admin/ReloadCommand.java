@@ -1,6 +1,6 @@
 package io.github.swagree.repokepvp.command.sub.admin;
 
-import io.github.swagree.Main;
+import io.github.swagree.repokepvp.Main;
 import io.github.swagree.repokepvp.command.sub.BasePlayerCommand;
 import io.github.swagree.repokepvp.manager.ServiceManager;
 import io.github.swagree.repokepvp.util.YmlUtil;

@@ -5,7 +5,6 @@ import com.pixelmonmod.pixelmon.api.events.battles.BattleEndEvent;
 import com.pixelmonmod.pixelmon.battles.controller.participants.BattleParticipant;
 import com.pixelmonmod.pixelmon.battles.controller.participants.PlayerParticipant;
 import com.pixelmonmod.pixelmon.enums.battle.BattleResults;
-import io.github.swagree.Main;
 import io.github.swagree.repokepvp.entity.Member;
 import io.github.swagree.repokepvp.manager.ServiceManager;
 import io.github.swagree.repokepvp.manager.rewardManager.RewardExecutor;
@@ -28,7 +27,7 @@ public class PokemonEventListener implements Listener {
     }
 
     @EventHandler
-    public void onBattleStarted(ForgeEvent event) {
+    public void onBattleEnd(ForgeEvent event) {
         if (event.getForgeEvent() instanceof BattleEndEvent) {
             handleBattleEnd((BattleEndEvent) event.getForgeEvent());
         }

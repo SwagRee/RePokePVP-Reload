@@ -5,7 +5,7 @@ import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.battles.attacks.Attack;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.storage.PlayerPartyStorage;
-import io.github.swagree.repokepvp.constant.PluginStatic;
+import io.github.swagree.repokepvp.staticPackage.PluginStatic;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;

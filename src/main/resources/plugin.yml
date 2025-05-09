@@ -1,6 +1,6 @@
 name: RePokePVP
-version: '1.0.3'
-main: io.github.swagree.Main
+version: '1.0.4'
+main: io.github.swagree.repokepvp.Main
 commands:
   rpp:
-    description: ""
+    description: "Pokemon's PVP Plugin"

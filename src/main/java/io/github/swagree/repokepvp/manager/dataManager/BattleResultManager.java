@@ -1,6 +1,6 @@
 package io.github.swagree.repokepvp.manager.dataManager;
 
-import io.github.swagree.Main;
+import io.github.swagree.repokepvp.Main;
 import io.github.swagree.repokepvp.entity.PlayerScore;
 import io.github.swagree.repokepvp.manager.rewardManager.RewardExecutor;
 import io.github.swagree.repokepvp.manager.configManager.StorageConfig;
@@ -15,12 +15,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-public class BattleManager {
+public class BattleResultManager {
     private final Main plugin;
     private final Storage storage;
     private final List<String> rewardCommands;
 
-    public BattleManager(Main plugin){
+    public BattleResultManager(Main plugin){
         this.plugin = plugin;
         StorageConfig config = new StorageConfig(plugin.getConfig());
         this.storage = initStorage(config);

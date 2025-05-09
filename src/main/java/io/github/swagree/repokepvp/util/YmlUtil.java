@@ -1,7 +1,6 @@
 package io.github.swagree.repokepvp.util;
 
-import io.github.swagree.Main;
-import io.github.swagree.repokepvp.manager.ServiceManager;
+import io.github.swagree.repokepvp.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

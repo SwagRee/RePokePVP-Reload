@@ -1,8 +1,7 @@
 package io.github.swagree.repokepvp.manager.rewardManager;
 
-import io.github.swagree.Main;
+import io.github.swagree.repokepvp.Main;
 import io.github.swagree.repokepvp.entity.Member;
-import io.github.swagree.repokepvp.manager.ServiceManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import java.util.List;

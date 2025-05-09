@@ -3,7 +3,7 @@ package io.github.swagree.repokepvp.command.sub.info;
 import io.github.swagree.repokepvp.command.sub.ISubCommand;
 import io.github.swagree.repokepvp.entity.PlayerScore;
 import io.github.swagree.repokepvp.manager.ServiceManager;
-import io.github.swagree.repokepvp.manager.dataManager.BattleManager;
+import io.github.swagree.repokepvp.manager.dataManager.BattleResultManager;
 import org.bukkit.command.CommandSender;
 
 import java.sql.SQLException;
@@ -42,7 +42,7 @@ public class TopCommand implements ISubCommand {
     @Override
     public boolean execute(CommandSender sender, String[] args) {
         try {
-            BattleManager battleManager = serviceManager.getBattleManager();
+            BattleResultManager battleManager = serviceManager.getBattleManager();
             List<PlayerScore> topPlayers = battleManager.getTop();
 
             if (topPlayers.isEmpty()) {

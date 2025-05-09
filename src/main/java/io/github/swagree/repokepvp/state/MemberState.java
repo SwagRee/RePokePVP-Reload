@@ -6,6 +6,6 @@ import io.github.swagree.repokepvp.entity.Member;
 public interface MemberState {
     void handleJoinQueue(String configName);
     void handleMatchFound(Member opponent);
-    void handleStartBattle(BattleRules rules);
+    void handleStartBattle(BattleRules battleRules);
     void handleEndBattle();
 }

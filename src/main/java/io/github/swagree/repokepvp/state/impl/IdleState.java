@@ -3,6 +3,7 @@ package io.github.swagree.repokepvp.state.impl;
 import com.pixelmonmod.pixelmon.battles.rules.BattleRules;
 import io.github.swagree.repokepvp.entity.Member;
 import io.github.swagree.repokepvp.manager.ServiceManager;
+import io.github.swagree.repokepvp.manager.memberManager.MemberManager;
 import io.github.swagree.repokepvp.util.YmlUtil;
 import org.bukkit.ChatColor;
 
@@ -22,11 +23,13 @@ public class IdleState extends BaseState {
                 YmlUtil.getConfig("pvplist/" + configName))) {
             return;
         }
-
         // 加入匹配队列
-        serviceManager.getMatchQueueManager().addToQueue(member.getPlayerId());
+
         member.getBukkitPlayer().sendMessage(ChatColor.GREEN + "已加入匹配队列");
         member.transitionTo(new InQueueState(member, serviceManager));
+        serviceManager.getMatchQueueManager().addToQueue(member.getPlayerId(),configName);
+
+
     }
 
     @Override
@@ -45,4 +48,6 @@ public class IdleState extends BaseState {
     public void handleEndBattle() {
         // 闲置状态不需要结束战斗
     }
+
+
 }

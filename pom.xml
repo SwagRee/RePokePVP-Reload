@@ -6,10 +6,10 @@
 
     <groupId>io.github.swagree</groupId>
     <artifactId>RePokePVP</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4.2</version>
     <packaging>jar</packaging>
 
-    <name>RePokeCommand</name>
+    <name>RePokePVP</name>
 
     <properties>
         <java.version>1.8</java.version>

@@ -1,7 +1,7 @@
 package io.github.swagree.repokepvp.entity;
 
 import com.pixelmonmod.pixelmon.battles.rules.BattleRules;
-import io.github.swagree.Main;
+import io.github.swagree.repokepvp.Main;
 import io.github.swagree.repokepvp.manager.ServiceManager;
 import io.github.swagree.repokepvp.state.impl.IdleState;
 import io.github.swagree.repokepvp.state.impl.InBattleState;
@@ -14,36 +14,39 @@ import java.util.UUID;
 public class Member {
     private final UUID playerId;
     private final String playerName;
-    private MemberState state;
+    private MemberState currentState;
     private final Player bukkitPlayer;
 
-    public Member(Player player, ServiceManager serviceManager) { // 通过构造函数注入
+    public Member(Player player) {
         this.playerId = player.getUniqueId();
         this.playerName = player.getName();
         this.bukkitPlayer = player;
-        // 依赖注入
-        this.state = new IdleState(this, serviceManager); // 使用注入的 ServiceManager
+        this.currentState  = new IdleState(this,new ServiceManager(Main.getInstance())); // 初始状态为闲置状态
+
+    }
+    public MemberState getCurrentState() {
+        return currentState;
     }
     // 状态转换方法
-    public void transitionTo(MemberState state) {
-        this.state = state;
+    public void transitionTo(MemberState currentState) {
+        this.currentState = currentState;
     }
 
     // 业务方法委托给当前状态处理
     public void joinQueue(String configName) {
-        state.handleJoinQueue(configName);
+        currentState.handleJoinQueue(configName);
     }
 
     public void matchFound(Member opponent) {
-        state.handleMatchFound(opponent);
+        currentState.handleMatchFound(opponent);
     }
 
     public void startBattle(BattleRules rules) {
-        state.handleStartBattle(rules);
+        currentState.handleStartBattle(rules);
     }
 
     public void endBattle() {
-        state.handleEndBattle();
+        currentState.handleEndBattle();
     }
 
     // Getter方法
@@ -61,14 +64,14 @@ public class Member {
 
     // 状态检查方法
     public boolean isIdle() {
-        return state instanceof IdleState;
+        return currentState instanceof IdleState;
     }
 
     public boolean isInQueue() {
-        return state instanceof InQueueState;
+        return currentState instanceof InQueueState;
     }
 
     public boolean isInBattle() {
-        return state instanceof InBattleState;
+        return currentState instanceof InBattleState;
     }
 }

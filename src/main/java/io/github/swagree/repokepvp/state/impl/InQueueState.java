@@ -18,7 +18,8 @@ public class InQueueState extends BaseState {
     @Override
     public void handleMatchFound(Member opponent) {
         member.getBukkitPlayer().sendMessage(ChatColor.GREEN + "匹配成功! 对手: " + opponent.getPlayerName());
-        member.transitionTo(new InBattleState(member,serviceManager));
+        member.transitionTo(new InBattleState(member,serviceManager,opponent));
+
     }
 
     @Override

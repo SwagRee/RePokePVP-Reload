@@ -1,14 +1,14 @@
 package io.github.swagree.repokepvp.manager;
 
-import io.github.swagree.Main;
-import io.github.swagree.repokepvp.manager.dataManager.BattleManager;
+import io.github.swagree.repokepvp.Main;
+import io.github.swagree.repokepvp.manager.dataManager.BattleResultManager;
 import io.github.swagree.repokepvp.manager.matchManager.*;
 import io.github.swagree.repokepvp.manager.memberManager.MemberManager;
 import io.github.swagree.repokepvp.manager.ruleManager.RuleManager;
 
 public class ServiceManager {
 
-    private final BattleManager battleManager;
+    private final BattleResultManager battleManager;
     private final RuleManager ruleManager;
     private final MatchQueueManager matchQueueManager;
     private final BattleStateManager battleStateManager;
@@ -18,9 +18,9 @@ public class ServiceManager {
 
     public ServiceManager(Main plugin) {
         // 初始化所有管理器
-        this.battleManager = new BattleManager(plugin);
+        this.battleManager = new BattleResultManager(plugin);
         this.ruleManager = new RuleManager();
-        this.matchQueueManager = new MatchQueueManager();
+        this.matchQueueManager = new MatchQueueManager(plugin,this);
         this.battleStateManager = new BattleStateManager();
         this.battleValidator = new BattleValidator();
         this.battleStarter = new BattleStarter();
@@ -28,13 +28,11 @@ public class ServiceManager {
     }
 
     public void shutdown() {
-        if (battleManager != null) {
-            battleManager.close();
-        }
+        battleManager.close();
     }
 
     // Getter 方法
-    public BattleManager getBattleManager() {
+    public BattleResultManager getBattleManager() {
         return battleManager;
     }
 

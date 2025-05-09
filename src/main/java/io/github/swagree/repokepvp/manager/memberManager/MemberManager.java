@@ -8,16 +8,17 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static io.github.swagree.repokepvp.staticPackage.PluginStatic.members;
+
 public class MemberManager {
     ServiceManager serviceManager;
     public MemberManager(ServiceManager serviceManager) {
         this.serviceManager = serviceManager;
     }
 
-    private final Map<UUID, Member> members = new ConcurrentHashMap<>();
 
     public Member getMember(Player player) {
-        return members.computeIfAbsent(player.getUniqueId(), k -> new Member(player,serviceManager));
+        return members.computeIfAbsent(player.getUniqueId(), k -> new Member(player));
     }
 
     public Member getMember(UUID playerId) {
